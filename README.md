@@ -1,7 +1,5 @@
 Single GET endpoint (/fibonacci/{n}) which computes fib(n) recursively. 
 
-
-
 # [No caching](https://github.com/ckleinvehn/Spring-caching-demo/releases/tag/fibonacci-no-caching)
 Before caching was implemented. Naive. Repeated, wasted computation.
 
