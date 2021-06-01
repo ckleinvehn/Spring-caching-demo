@@ -1,5 +1,6 @@
 package edu.depaul.cachingbyexample.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 
 @Service
+@Slf4j
 public class FibonacciService {
     @Autowired
     private FibonacciService fibonacciService;
@@ -24,8 +26,9 @@ public class FibonacciService {
      *                            == 1 + 0
      *                            == 1
      */
-    @Cacheable("fibonacci")
+    @Cacheable(cacheNames = {"fibonacci"})
     public int calculateFibonacci(int n) {
+        log.info("calculateFibonacci: " + n);
         if (n < 0) throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Argument n must be >= 0");
         return n < 2 ? n
             : fibonacciService.calculateFibonacci(n - 1) + fibonacciService.calculateFibonacci(n - 2);
